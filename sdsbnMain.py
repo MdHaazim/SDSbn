@@ -1,5 +1,8 @@
 #import needed libraries
-#testing 
+import os
+import numpy as np
+from collections import Counter
+
 #create word dictionary
 
 #feature extraction
