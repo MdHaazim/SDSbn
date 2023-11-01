@@ -9,9 +9,9 @@ from nltk.corpus import stopwords      # contains list of stopwords
 def make_dictionary(train_dir):
     # ref https://www.kdnuggets.com/2020/07/spam-filter-python-naive-bayes-scratch.html
     
-    train_set = pd.read_csv(train_dir)
-    train_set['email'] = train_set['email'].str.split()
-    vocab = []
+    train_set = pd.read_csv(train_dir)        # Loads folder instead of using OS since it is a .csv file
+    train_set['email'] = train_set['email'].str.split()        # Takes only the email column and splits into individual words
+    vocab = []        # Stores all the words in data set
     for mail in train_set['email']:
         try:
             for word in mail:
@@ -20,7 +20,7 @@ def make_dictionary(train_dir):
             #print("cant")
             continue
     
-    dictionary = Counter(vocab)
+    dictionary = Counter(vocab)    # From here it follows the slides basically
     #print(len(vocab))       #print number of unique words in train set
     
     list_to_remove = dictionary.keys()
