@@ -4,6 +4,9 @@ import numpy as np
 from collections import Counter
 import pandas as pd
 from nltk.corpus import stopwords      # contains list of stopwords
+from sklearn.svm import LinearSVC #SVC, NuSVC, 
+from sklearn.metrics import confusion_matrix
+from sklearn.naive_bayes import MultinomialNB #BernoulliNB,
 
 #create word dictionary
 def make_dictionary(train_dir):
