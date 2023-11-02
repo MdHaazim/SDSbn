@@ -37,7 +37,40 @@ def make_dictionary(train_dir):
     return dictionary
     
 #feature extraction
+def read_email_text_file(file_path):
+    with open(file_path, 'r', encoding='utf-8') as file:
+        return file.read()
 
+def preprocess_text(text):
+    # Tokenization (split the text into words)
+    words = nltk.word_tokenize(text)
+    
+    # Convert to lowercase and remove non-alphabetic characters
+    words = [word.lower() for word in words if word.isalpha()]
+    
+    # Remove stopwords
+    stop_words = set(stopwords.words('english'))
+    words = [word for word in words if word not in stop_words]
+    
+    # Join the words back into a single string
+    processed_text = ' '.join(words)
+    
+    return processed_text
+def extract_features(text, method='count'):
+    if method == 'count':
+        vectorizer = CountVectorizer()
+    else:
+        raise ValueError("Invalid feature extraction method. Use 'count'")
+
+    feature_matrix = vectorizer.fit_transform([text])
+    feature_names = vectorizer.get_feature_names_out()
+
+    return feature_matrix, feature_names
+    
+ def save_features_to_csv(features, feature_names, output_csv):
+    df = pd.DataFrame(features.toarray(), columns=feature_names)
+    df.to_csv(output_csv, index=False)
+     
 #datasets
 train_dir = "spam_or_not_spam.csv"
 
