@@ -67,7 +67,7 @@ def extract_features(text, method='count'):
 
     return feature_matrix, feature_names
     
- def save_features_to_csv(features, feature_names, output_csv):
+def save_features_to_csv(features, feature_names, output_csv):
     df = pd.DataFrame(features.toarray(), columns=feature_names)
     df.to_csv(output_csv, index=False)
      
