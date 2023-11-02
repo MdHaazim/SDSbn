@@ -86,15 +86,15 @@ model1.fit(feature_matrix,feature_labels)
 model2.fit(feature_matrix,feature_labels)
 
 #Test the unseen mails for Spam
-test_dir= 'test-mails'
-test_matrix= extract_features(test_dir)
-test_labels=np.zeros(260)
-test_labels[130:260]=1
+#test_dir= 'test-mails'
+#test_matrix= extract_features(test_dir)
+#test_labels=np.zeros(260)
+#test_labels[130:260]=1
 
-result1=model1.predict(test_matrix)
-result2=model2.predict(test_matrix)
-matriz=confusion_matrix(test_labels,result1)
-matric=confusion_matrix(test_labels, result2)
+#result1=model1.predict(test_matrix)
+#result2=model2.predict(test_matrix)
+#matriz=confusion_matrix(test_labels,result1)
+#matric=confusion_matrix(test_labels, result2)   #Not sure abt test mails
 
 #print results
 print(make_dictionary(train_dir))
