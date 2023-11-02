@@ -82,8 +82,8 @@ train_dir = "spam_or_not_spam.csv"
 
 model1=MultinomialNB()
 model2=LinearSVC()
-model1.fit(feature_matrix,feature_names)
-model2.fit(feature_matrix,feature_names)
+model1.fit(train_matrix,train_label)
+model2.fit(train_matrix,train_label)
 
 #Test the unseen mails for Spam
 #test_dir= 'test-mails'
