@@ -78,8 +78,8 @@ def save_features_to_csv(features, feature_names, output_csv):
 train_dir = "spam_or_not_spam.csv"
 
 #train classifiers
-train_labels=np.zeros(702)
-train_labels[351:701]=1
+train_labels=np.zeros(3000)
+train_labels[2501:2999]=1
 train_matrix =  extract_features(train_dir)
 #Training SVM and Naive Bayes Classifier
 
