@@ -35,8 +35,15 @@ def make_dictionary(train_dir):
         elif item in stopwords.words('english'):    # removes stop words
             del dictionary[item]
             
+     # Remove stopwords
+    stop_words = set(stopwords.words('english'))
+    words = [word for word in words if word not in stop_words]           
     dictionary = dictionary.most_common(3000)
     #print(dictionary)
+
+    # Join the words back into a single string
+    processed_text = ' '.join(words)
+    
     return dictionary
     
 #feature extraction
@@ -44,21 +51,6 @@ def read_email_text_file(file_path):
     with open(file_path, 'r', encoding='utf-8') as file:
         return file.read()
 
-def preprocess_text(text):
-    # Tokenization (split the text into words)
-    words = nltk.word_tokenize(text)
-    
-    # Convert to lowercase and remove non-alphabetic characters
-    words = [word.lower() for word in words if word.isalpha()]
-    
-    # Remove stopwords
-    stop_words = set(stopwords.words('english'))
-    words = [word for word in words if word not in stop_words]
-    
-    # Join the words back into a single string
-    processed_text = ' '.join(words)
-    
-    return processed_text
 def extract_features(text, method='count'):
     if method == 'count':
         vectorizer = CountVectorizer()
