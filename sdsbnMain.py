@@ -69,22 +69,51 @@ def save_features_to_csv(features, feature_names, output_csv):
 #datasets
 train_dir = "spam_or_not_spam.csv"
 
-#train classifiers
-train_labels=np.zeros(3000)
-train_labels[2501:2999]=1
-train_matrix =  extract_features(train_dir)
-#Training SVM and Naive Bayes Classifier
+# Split dataset into train and test sets
+mail_spam = pd.read_csv(train_dir)
 
+#print(mail_spam.shape)     # Show the length
+mail_spam.head()
+
+mail_spam['label'].value_counts(normalize=True)     # Gives spam to ham ratio
+
+# Randomize the dataset
+data_randomized = mail_spam.sample(frac=1, random_state=1)
+
+# Calculate index for split
+training_test_index = round(len(data_randomized) * 0.8)
+
+# Split into training and test sets
+training_set = data_randomized[:training_test_index].reset_index(drop=True) 
+test_set = data_randomized[training_test_index:].reset_index(drop=True)     
+
+#print(training_set.shape)  # Show the length
+#print(test_set.shape)      # Show the length
+
+training_set['label'].value_counts(normalize=True)  # Gives spam to ham ratio
+test_set['label'].value_counts(normalize=True)      # Gives spam to ham ratio
+
+# make train and test data
+dictionary = make_dictionary(train_dir)
+train_labels = list(training_set['label'])
+# remove NaN in label to ham
+for i, word in enumerate(train_labels):
+    if np.isnan(word):
+        train_labels[i] = 0.0
+#train_matrix = extract_features()  # EXTRACT FEATURES GO HERE
+
+#test_matrix = extract_features()  # EXTRACT FEATURES GO HERE
+test_labels = list(test_set['label'])
+# remove NaN in label to ham
+for i, word in enumerate(test_labels):
+    if np.isnan(word):
+        test_labels[i] = 0.0
+        
+#Training SVM and Naive Bayes Classifier
 model1=MultinomialNB()
 model2=LinearSVC()
-model1.fit(train_matrix,train_label)
-model2.fit(train_matrix,train_label)
-
-#Test the unseen mails for Spam
-#test_dir= 'test-mails'
-#test_matrix= extract_features(test_dir)
-#test_labels=np.zeros(260)
-#test_labels[130:260]=1
+#model1.fit(train_matrix,train_labels)
+#model2.fit(train_matrix,train_labels)
 
 #result1=model1.predict(test_matrix)
 #result2=model2.predict(test_matrix)
@@ -92,4 +121,6 @@ model2.fit(train_matrix,train_label)
 #matric=confusion_matrix(test_labels, result2)   #Not sure abt test mails
 
 #print results
-print(make_dictionary(train_dir))
+#print(matriz)
+#print(matric)
+#print(make_dictionary(train_dir))
