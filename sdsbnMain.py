@@ -115,10 +115,10 @@ model2=LinearSVC()
 model1.fit(train_matrix,train_labels)
 model2.fit(train_matrix,train_labels)
 
-#result1=model1.predict(test_matrix)
-#result2=model2.predict(test_matrix)
-#matriz=confusion_matrix(test_labels,result1)
-#matric=confusion_matrix(test_labels, result2)   #Not sure abt test mails
+result1=model1.predict(test_matrix)
+result2=model2.predict(test_matrix)
+matriz=confusion_matrix(test_labels,result1)
+matric=confusion_matrix(test_labels, result2)   #Not sure abt test mails
 
 #print results
 #print(matriz)
