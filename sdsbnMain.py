@@ -100,9 +100,9 @@ train_labels = list(training_set['label'])
 for i, word in enumerate(train_labels):
     if np.isnan(word):
         train_labels[i] = 0.0
-#train_matrix = extract_features()  # EXTRACT FEATURES GO HERE
+train_matrix = extract_features('email')  # EXTRACT FEATURES GO HERE
 
-#test_matrix = extract_features()  # EXTRACT FEATURES GO HERE
+test_matrix = extract_features('email')  # EXTRACT FEATURES GO HERE
 test_labels = list(test_set['label'])
 # remove NaN in label to ham
 for i, word in enumerate(test_labels):
@@ -112,8 +112,8 @@ for i, word in enumerate(test_labels):
 #Training SVM and Naive Bayes Classifier
 model1=MultinomialNB()
 model2=LinearSVC()
-#model1.fit(train_matrix,train_labels)
-#model2.fit(train_matrix,train_labels)
+model1.fit(train_matrix,train_labels)
+model2.fit(train_matrix,train_labels)
 
 #result1=model1.predict(test_matrix)
 #result2=model2.predict(test_matrix)
